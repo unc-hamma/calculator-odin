@@ -1,6 +1,10 @@
 let numA = 0;
 let numB = 0;
 let operator ;
+const nbContainer = document.querySelector(".numsOpsContainer");  // numbers div container
+const numbers = document.querySelectorAll(".nums");  // all numbers's buttons
+const display = document.querySelector('output'); // output display
+
 
 function add (a, b) {
   return a + b;
@@ -35,3 +39,17 @@ function operate (a, b, op){
             break;
     }
 }
+
+// update numbers and show it on display
+function updateNb (currentNum) {    
+    if(operator !== "") {
+        numA += currentNum;
+        display.textContent += numA;}
+    else {
+        numB += currentNum;
+        display.textContent += numB;}
+}
+
+
+numbers.forEach(number => number.addEventListener('click', event => 
+        updateNb(event.currentTarget.textContent)));
