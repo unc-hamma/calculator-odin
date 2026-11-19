@@ -23,7 +23,7 @@ const division = (a, b) => {
         alert("Division by 0 is not possible!" + a, + " " + b);
         console.log(a)
     }
-    else return currentResult = Math.round((a / b) * 1000) / 1000;
+    else return currentResult = Math.round((a / b) * 1000000) / 1000000;
 }
 
 function operate (a, b, op){

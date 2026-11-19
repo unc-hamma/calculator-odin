@@ -1,0 +1,61 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+
+body {
+  margin: 0;
+  height: 100vh;
+  padding-bottom: 8vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  font-family: "Audiowide", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 30px;
+}
+
+.delete, .clear {
+  font-family: "Audiowide", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+}
+
+.ops , .equals, .nums{
+  height: 70px;
+  width: 70px;
+  box-sizing: border-box;  
+  flex: 1;
+  font-family: "Audiowide", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: large;
+}
+
+output {
+  background-color: bisque;
+  border: 2px solid black;
+  height: 100px;
+  width: 400px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-sizing: border-box;
+  vertical-align: top;
+}
+
+.display, .row1, .row2, .row3, .row4 {
+  display: flex;
+  gap: 5px;
+  margin: 3px;
+}
+
+.numsOpsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
