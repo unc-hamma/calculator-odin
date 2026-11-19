@@ -7,6 +7,8 @@ const numbers = document.querySelectorAll(".nums");                             
 const operators = document.querySelectorAll(".ops");                            // all operators buttons
 const display = document.querySelector('output');                               // output display
 const equalsBtn = document.querySelector('.equals');                            // equals button
+const deleteBtn = document.querySelector(".delete");                            // delete button
+const clearBtn = document.querySelector(".clear");                              // clear button
 
 
 const add = (a, b) =>  currentResult = a + b;
@@ -21,7 +23,7 @@ const division = (a, b) => {
         alert("Division by 0 is not possible!" + a, + " " + b);
         console.log(a)
     }
-    else return currentResult = a / b;
+    else return currentResult = Math.round((a / b) * 1000) / 1000;
 }
 
 function operate (a, b, op){
@@ -54,7 +56,10 @@ function updateNb (currentNum) {
     
     if(operator === "" ) {
         if(currentNum === '.'){
-            numA += currentNum;
+            if(!String(numA).includes('.')) {
+                numA += currentNum;
+                display.textContent = numA;
+            }
         }
         else {
             numA += currentNum;
@@ -63,13 +68,30 @@ function updateNb (currentNum) {
     }
     else {
         if(currentNum === '.'){
-            numB += currentNum;
+            if(!String(numB).includes('.')) {
+                numB += currentNum;
+                display.textContent = numB;
+            }
         }
         else {
             numB += currentNum;
             numB = Number(numB);
             display.textContent = numB;}
         }
+}
+
+// function to delete last number 
+function handleDelete(){
+
+    if(operator === "" ) {
+        numA = String(numA).slice(0, -1);
+        display.textContent = numA;
+    }
+
+    else {
+        numB = String(numB).slice(0, -1);
+        display.textContent = numB;
+    }
 }
 
 const updateOp = op => {
@@ -96,4 +118,15 @@ equalsBtn.addEventListener('click', () => {
     numA = currentResult;
     numB = 0;
     operator = "=";
-});    
+});
+
+// clear button click event to initialize all
+clearBtn.addEventListener('click', () => {
+    numA = 0;
+    numB = 0;
+    operator = "";
+    display.textContent = "";
+})
+
+// delete last number button event 
+deleteBtn.addEventListener('click', handleDelete);
