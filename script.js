@@ -25,6 +25,7 @@ const division = (a, b) => {
 }
 
 function operate (a, b, op){
+    console.log("numA : " + a + " //// numB : " + b + " /// operator : " + op + " //// currentResult : " + currentResult)
     switch(op){
 
         case "+" : 
@@ -52,13 +53,23 @@ function updateNb (currentNum) {
     }
     
     if(operator === "" ) {
-        numA += currentNum;
-        numA = Number(numA);
-        display.textContent = numA;}
+        if(currentNum === '.'){
+            numA += currentNum;
+        }
+        else {
+            numA += currentNum;
+            numA = Number(numA);
+            display.textContent = numA;}
+    }
     else {
-        numB += currentNum;
-        numB = Number(numB);
-        display.textContent = numB;}
+        if(currentNum === '.'){
+            numB += currentNum;
+        }
+        else {
+            numB += currentNum;
+            numB = Number(numB);
+            display.textContent = numB;}
+        }
 }
 
 const updateOp = op => {
@@ -70,17 +81,19 @@ numbers.forEach(number => number.addEventListener('click', event =>
         updateNb(event.currentTarget.textContent)));
 
 // operator buttons event listener
-operators.forEach(opr => opr.addEventListener('click', event => {
-    updateOp(event.currentTarget.textContent);
+operators.forEach(opr => opr.addEventListener('click', event => {  
     if(numB !== 0) {                                                // test if number b exists then continue operation 
         operate(numA, numB, operator);
         numA = currentResult;
         numB = 0;
     }
+    updateOp(event.currentTarget.textContent);
 }));
 
 // equals button event listener
 equalsBtn.addEventListener('click', () => {
     display.textContent = operate(numA, numB, operator);
+    numA = currentResult;
+    numB = 0;
     operator = "=";
 });    
