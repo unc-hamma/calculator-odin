@@ -11,37 +11,31 @@ const deleteBtn = document.querySelector(".delete");                            
 const clearBtn = document.querySelector(".clear");                              // clear button
 
 
-const add = (a, b) =>  currentResult = a + b;
+const add = (a, b) =>  currentResult = Math.round((a + b) * 1000000) / 1000000
 
-const subtract = (a, b) => currentResult = a - b;
+const subtract = (a, b) => currentResult = Math.round((a - b) * 1000000) / 1000000
 
-const multiply =  (a, b) => currentResult = a * b;
+const multiply =  (a, b) => currentResult = Math.round((a * b) * 1000000) / 1000000
 
 const division = (a, b) => {
     if(b === 0) {
         numA = 0;                                  // initiaize numA to not cummulate in new operation
-        alert("Division by 0 is not possible!" + a, + " " + b);
-        console.log(a)
+        alert("Division by 0 is not possible!");
     }
     else return currentResult = Math.round((a / b) * 1000000) / 1000000;
 }
 
 function operate (a, b, op){
-    console.log("numA : " + a + " //// numB : " + b + " /// operator : " + op + " //// currentResult : " + currentResult)
     switch(op){
 
         case "+" : 
             return add(a, b);
-            break;
         case "-" : 
             return subtract(a, b);
-            break;
         case "*" : 
             return multiply(a, b);
-            break;
         case "/" :
             return division(a, b);
-            break;
     }
     
 }
@@ -98,6 +92,22 @@ const updateOp = op => {
     operator = op;
     display.textContent += op;}
 
+
+const handleEquals = () => {
+    if(operator === '=' || operator === null) return;
+    display.textContent = operate(numA, numB, operator);
+    numA = currentResult;
+    numB = 0;
+    operator = "=";
+}
+
+const handleClear = () => {
+    numA = 0;
+    numB = 0;
+    operator = "";
+    display.textContent = "";
+}
+
 // numbers buttons event listener
 numbers.forEach(number => number.addEventListener('click', event => 
         updateNb(event.currentTarget.textContent)));
@@ -113,20 +123,25 @@ operators.forEach(opr => opr.addEventListener('click', event => {
 }));
 
 // equals button event listener
-equalsBtn.addEventListener('click', () => {
-    display.textContent = operate(numA, numB, operator);
-    numA = currentResult;
-    numB = 0;
-    operator = "=";
-});
+equalsBtn.addEventListener('click', handleEquals);
 
 // clear button click event to initialize all
-clearBtn.addEventListener('click', () => {
-    numA = 0;
-    numB = 0;
-    operator = "";
-    display.textContent = "";
-})
+clearBtn.addEventListener('click', handleClear)
 
 // delete last number button event 
 deleteBtn.addEventListener('click', handleDelete);
+
+//keyboard event listeners
+
+document.addEventListener('keydown', event => {
+    if(/^[0-9]$/.test(event.key)) updateNb(event.key);
+
+    else if(event.key === '+' || event.key === '-' || event.key === '/' || event.key === '*') updateOp(event.key);
+
+    else if(event.key === "Enter") {
+        event.preventDefault();
+        handleEquals();
+    }
+    else if(event.key === "Backspace") handleDelete();
+    else if(event.key === "Escape")  handleClear();
+})

@@ -22,6 +22,8 @@ body {
   font-weight: 400;
   font-style: normal;
   font-size: 20px;
+  color: cornflowerblue;
+  border-radius: 20px;
 }
 
 .ops , .equals, .nums{
@@ -33,11 +35,14 @@ body {
   font-weight: 400;
   font-style: normal;
   font-size: large;
+  background-color: aliceblue;
+  border-radius: 20px;
 }
 
 output {
-  background-color: bisque;
+  background-color: rgb(94, 128, 173);
   border: 2px solid black;
+  border-radius: 20px;
   height: 100px;
   width: 400px;
   display: inline-flex;
